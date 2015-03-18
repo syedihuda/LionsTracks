@@ -1,0 +1,18 @@
+/* -----------------------------------------
+   Custom.css - put your own changes here 
+----------------------------------------- */
+.page-sidebar:after {
+  background-color: #1a1a1a;
+}
+.page-navbar .navbar-brand {
+  background-color: #ffffff;
+  padding: 1px 1px;
+}
+.sidebar-panel .sidebar-panel-title {
+  background-color: #57575d;
+  color: #ffffff;
+}
+.page-sidebar .side-nav .nav > li a.active {
+  background-color: #1c2128;
+  color: #ffffff;
+}
