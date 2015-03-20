@@ -1,1 +1,1 @@
-web: gunicorn lionstracksapp.wsgi --log-file -
+web: gunicorn LionsTracks.wsgi --log-file -
