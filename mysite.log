@@ -1,0 +1,52 @@
+[26/Mar/2015 21:43:05] ERROR [django.request:231] Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/handlers/base.py", line 98, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 343, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 372, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/jefffederman/Code/LionsTracks/LionsTracks/urls.py", line 8, in <module>
+    url(r'^lionstracksapp/', include('lionstracksapp.urls', namespace="lionstracksapp")),
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 28, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/jefffederman/Code/LionsTracks/lionstracksapp/urls.py", line 4, in <module>
+    from lionstracksapp import views
+  File "/Users/jefffederman/Code/LionsTracks/lionstracksapp/views.py", line 5, in <module>
+    from bs4 import BeautifulSoup
+ImportError: No module named bs4
+[26/Mar/2015 21:43:05] ERROR [django.request:231] Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/handlers/base.py", line 87, in get_response
+    response = middleware_method(request)
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/middleware/common.py", line 72, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 619, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 494, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 343, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 372, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/core/urlresolvers.py", line 366, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/jefffederman/Code/LionsTracks/LionsTracks/urls.py", line 8, in <module>
+    url(r'^lionstracksapp/', include('lionstracksapp.urls', namespace="lionstracksapp")),
+  File "/Users/jefffederman/Code/virtualenvs/lionstracks/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 28, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/jefffederman/Code/LionsTracks/lionstracksapp/urls.py", line 4, in <module>
+    from lionstracksapp import views
+  File "/Users/jefffederman/Code/LionsTracks/lionstracksapp/views.py", line 5, in <module>
+    from bs4 import BeautifulSoup
+ImportError: No module named bs4
