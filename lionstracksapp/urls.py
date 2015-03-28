@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     # ex: /lionstracksapp/dataupload/
     url(r'^dataupload/$', views.dataupload, name='dataupload'),
+    url(r'^login/$', views.login, name='login')
 )

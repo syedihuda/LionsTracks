@@ -10,6 +10,12 @@ from lionstracksapp.util import healthkitparser_bs4
 logger = logging.getLogger(__name__)
 
 # Create your views here.
+def login(request):
+    return render(request, 'lionstracksapp/login.html', None)
+
+def signup(request):
+    return render(request, 'lionstracksapp/signup.html', None)
+
 def index(request):
     context = {'step_data':get_metric_data('STEPS'), 'distance_data':get_metric_data('DISTANCE'), 'stairs_data':get_metric_data('STAIRS')}
     return render(request, 'lionstracksapp/dashboard.html', context)
