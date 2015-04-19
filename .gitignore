@@ -41,5 +41,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+<<<<<<< HEAD
 db.sqlite3
 *.sqlite3
+=======
+
+venv
+*.pyc
+staticfiles
+>>>>>>> origin/master

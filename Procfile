@@ -1,0 +1,1 @@
+web: gunicorn LionsTracks.wsgi --log-file -

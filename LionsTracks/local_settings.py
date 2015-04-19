@@ -10,19 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-STATIC_ROOT = 'staticfiles'
-
-STATIC_URL = '/static/'
-
-STATIC_FILES_DIRS = (
-    os.path.join(BASE_DIR, 'static')
-)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,11 +20,11 @@ STATIC_FILES_DIRS = (
 SECRET_KEY = '$t#fn8kufikp^g=!mzg3sjbloyl04ce&06_m^gzwl+e(e%tory'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -69,13 +57,12 @@ WSGI_APPLICATION = 'LionsTracks.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-import dj_database_url
-
-DATABASES = {}
-
-DATABASES['default'] = dj_database_url.config()
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -90,54 +77,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-<<<<<<< HEAD
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_URL = '/lionstracksapp/register/'
 
-=======
->>>>>>> origin/master
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'mysite.log',
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'ERROR',
-        },
-        'lionstracksapp': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-    }
-}
-
-try:
-  from local_settings import *
-except Exception as e:
-  pass
