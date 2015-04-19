@@ -16,3 +16,6 @@
   background-color: #1c2128;
   color: #ffffff;
 }
+.page-content.right-sidebar-page {
+  margin-right: 10px;
+}

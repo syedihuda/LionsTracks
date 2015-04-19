@@ -24,6 +24,8 @@
     <link href="{% static 'lionstracksapp/css/plugins.css' %}" rel="stylesheet" />
     <!-- Main stylesheets (template main css file) -->
     <link href="{% static 'lionstracksapp/css/main.css' %}" rel="stylesheet" />
+    <!-- Other -->
+    <link href="{% static 'lionstracksapp/css/multiple-select.css' %}" rel="stylesheet" />
     <!-- Custom stylesheets ( Put your own changes here ) -->
     <link href="{% static 'lionstracksapp/css/custom.css' %}" rel="stylesheet" />
 
@@ -38,8 +40,8 @@
 <div id="header" class="page-navbar">
     <!-- .navbar-brand -->
     <a href="/lionstracksapp/" class="navbar-brand hidden-xs hidden-sm">
-        <img src="{% static 'lionstracksapp/img/lionstrackslogo.bmp' %}" class="logo hidden-xs" alt="lionstracks logo">
-        <!--<img src="img/lionstracks-p-sm.png" class="logo-sm hidden-lg hidden-md" alt="lionstracks logo">-->
+        <img src="{% static 'lionstracksapp/img/Lionstracks-logo-v2-02.png' %}" class="logo hidden-xs" alt="lionstracks logo">
+        <img src="{% static 'lionstracksapp/img/Lionstracks-logo-v2-02_sm.png' %}" class="logo-sm hidden-lg hidden-md" alt="lionstracks logo">
     </a>
     <!-- / navbar-brand -->
     <!-- .no-collapse -->
@@ -82,19 +84,30 @@
                 </div>
                 <!-- / .sidebar-panel -->
                 <div class="user-info clearfix">
-                    <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/017/276/3ddad99.jpg">
-                    <span class="name">Syed Huda</span>
+                    <!--<img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/017/276/3ddad99.jpg">-->
+                    <img src="/static/lionstracksapp/img/users/user_blue_64x64.png" />
+                    <span class="name">
+                        {% if user.is_authenticated %}
+                            {{ user.username }}
+                        {% else %}Guest
+                        {% endif %}
+                    </span>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default btn-xs"><i class="l-basic-gear"></i>
                         </button>
                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">settings <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu right" role="menu">
-                            <li><a href="#"><i class="fa fa-edit"></i>Edit profile</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-power-off"></i>Logout</a>
-                            </li>
+                            {% if user.is_authenticated %}
+                                <li><a href="#"><i class="fa fa-edit"></i>Edit profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="/lionstracksapp/logout/"><i class="fa fa-power-off"></i>Logout</a>
+                                </li>
+                            {% else %}
+                                <li><a href="/lionstracksapp/register/"><i class="fa fa-power-off"></i>Login</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -112,8 +125,6 @@
                         </li>
                         <li><a href="/lionstracksapp/"><i class="l-basic-todolist-pen"></i><span class="txt">Set Goals</span></a>
                         </li>
-                        <li><a href="/lionstracksapp/"><i class="l-basic-world"></i><span class="txt">Connect With Others</span></a>
-                        </li>
                     </ul>
                 </div>
                 <!--  .sidebar-panel -->
@@ -123,47 +134,7 @@
         <!-- End .sidebar-inner -->
     </aside>
     <!-- / page-sidebar -->
-    <!-- Start #right-sidebar -->
-    <aside id="right-sidebar" class="right-sidebar hidden-md hidden-sm hidden-xs">
-        <!-- Start .sidebar-inner -->
-        <div class="sidebar-inner">
-            <!-- Start .sidebar-scrollarea -->
-            <div class="sidebar-scrollarea">
-                <div class="tabs">
-                    <!-- Start .rs tabs -->
-                    <ul id="rstab" class="nav nav-tabs nav-justified">
-                        <li class="active">
-                            <a href="#" data-toggle="tab">Feed</a>
-                        </li>
-                    </ul>
-                    <div id="rstab-content" class="tab-content">
-                        <div class="tab-pane fade active in" id="activity">
-                            <ul class="timeline timeline-icons timeline-sm">
-                                <li>
-                                    <p>
-                                        <a href="#">John Sun</a> reached his Health Goals
-                                        <span class="timeline-icon"><i class="fa fa-file-text-o"></i></span>
-                                        <span class="timeline-date">Jan 1, 2015</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        Lion's Tracks updated
-                                        <span class="timeline-icon"><i class="fa fa-database"></i></span>
-                                        <span class="timeline-date">Dec 1, 2014</span>
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End .rs tabs -->
-            </div>
-            <!-- End .sidebar-scrollarea -->
-        </div>
-        <!-- End .sidebar-inner -->
-    </aside>
-    <!-- End #right-sidebar -->
+
     <!-- .page-content -->
     <div class="page-content sidebar-page right-sidebar-page clearfix">
         <!-- .page-content-wrapper -->
@@ -177,7 +148,7 @@
                     </div>
                     <div class="header-stats">
                         <div class="spark clearfix">
-                            <div class="spark-info"><span class="number">1,500</span>Users </div>
+                            <div class="spark-info"><span class="number">{{ all_users_count|safe }}</span>Users </div>
                             <div id="spark-visitors" class="sparkline"></div>
                         </div>
                     </div>
@@ -206,21 +177,21 @@
                                 <!-- Start .panel -->
                                 <div class="panel-body">
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to="85">0</span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to={{ user_avg_steps|safe }}>0</span>
                                         </div>
                                         <div class="spark-info mtm5">Your Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="98"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to={{ all_users_avg_steps|safe }}></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Peer Daily Average</div>
+                                        <div class="spark-info">Columbia Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="67"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="5500"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Columba Daily Average</div>
+                                        <div class="spark-info">Recommended Daily Average</div>
                                     </div>
                                 </div>
                             </div>
@@ -229,6 +200,28 @@
                         <!-- col-lg-3 end here -->
                     </div>
                     <!-- col-lg-8 end here -->
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <!-- col-lg-6 start here -->
+                        <div class="panel panel-default plain toggle panelClose panelRefresh">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title"></i>
+                                    <div class="col-md-6">
+                                        <select multiple="multiple" id="checkbox1">
+                                            {% for item in user_list %}
+                                                <option value="{{ item.id }}">{{ item.username }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                        <!-- End .panel -->
+                    </div>
+                    <!-- col-lg-4 end here -->
 
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <!-- col-lg-6 start here -->
@@ -280,6 +273,7 @@
                         <!-- End .panel -->
                     </div>
                     <!-- col-lg-4 end here -->
+
                 </div>
                 <!-- End .row -->
 
@@ -307,21 +301,21 @@
                                 <!-- Start .panel -->
                                 <div class="panel-body">
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to="6">0</span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to={{ user_avg_stairs|safe }}>0</span>
                                         </div>
                                         <div class="spark-info mtm5">Your Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="3"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to={{ all_users_avg_stairs|safe }}></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Peer Daily Average</div>
+                                        <div class="spark-info">Columbia Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="2"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="12"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Columba Daily Average</div>
+                                        <div class="spark-info">Recommended Daily Average</div>
                                     </div>
                                 </div>
                             </div>
@@ -357,21 +351,21 @@
                                 <!-- Start .panel -->
                                 <div class="panel-body">
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to="8">0</span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to={{ user_avg_distance|safe }}>0</span>
                                         </div>
                                         <div class="spark-info mtm5">Your Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="12"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to={{ all_users_avg_distance|safe }}></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Peer Daily Average</div>
+                                        <div class="spark-info">Columbia Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="6"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="5250"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Columba Daily Average</div>
+                                        <div class="spark-info">Recommended Daily Average</div>
                                     </div>
                                 </div>
                             </div>
@@ -396,20 +390,14 @@
     <p class="pull-left">
         Copyrights &copy; 2015 Lions Tracks. All rights reserved.
     </p>
-    <p class="pull-right">
-        <a href="#" class="mr5">Terms of use</a>
-    </p>
 </div>
 <!-- End #footer  -->
-<!-- Back to top -->
-<div id="back-to-top"><a href="#">Back to Top</a>
-</div>
 <!-- Javascripts -->
 <!-- Load page context data -->
 <script>
-    var step_data = {{ step_data }};
-    var distance_data = {{ distance_data }};
-    var stairs_data = {{ stairs_data }};
+    var step_data = {{ step_data|safe }};
+    var distance_data = {{ distance_data|safe }};
+    var stairs_data = {{ stairs_data|safe }};
 </script>
 <!-- Load pace first -->
 <script src="{% static 'lionstracksapp/plugins/core/pace/pace.min.js' %}"></script>
@@ -463,5 +451,6 @@
 <script src="{% static 'lionstracksapp/js/jquery.dynamic.js' %}"></script>
 <script src="{% static 'lionstracksapp/js/main.js' %}"></script>
 <script src="{% static 'lionstracksapp/js/pages/dashboard.js' %}"></script>
+<script src="{% static 'lionstracksapp/js/libs/jquery.multiple.select.js' %}"></script>
 </body>
 </html>

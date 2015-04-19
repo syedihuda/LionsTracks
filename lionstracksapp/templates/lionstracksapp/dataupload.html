@@ -82,19 +82,30 @@
                         </div>
                         <!-- / .sidebar-panel -->
                         <div class="user-info clearfix">
-                            <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/017/276/3ddad99.jpg">
-                            <span class="name">Syed Huda</span>
+                            <!--<img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/017/276/3ddad99.jpg">-->
+                            <img src="/static/lionstracksapp/img/users/user_blue_64x64.png" />
+                            <span class="name">
+                                {% if user.is_authenticated %}
+                                    {{ user.username }}
+                                {% else %}Guest
+                                {% endif %}
+                            </span>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs"><i class="l-basic-gear"></i>
                                 </button>
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">settings <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu right" role="menu">
+                                {% if user.is_authenticated %}
                                     <li><a href="#"><i class="fa fa-edit"></i>Edit profile</a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i>Logout</a>
+                                    <li><a href="/lionstracksapp/logout/"><i class="fa fa-power-off"></i>Logout</a>
                                     </li>
+                                {% else %}
+                                    <li><a href="/lionstracksapp/register/"><i class="fa fa-power-off"></i>Login</a>
+                                    </li>
+                                {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -108,11 +119,9 @@
                             <ul class="nav">
                                 <li><a href="/lionstracksapp/"><i class="l-ecommerce-graph3"></i><span class="txt">Dashboard</span></a>
                                 </li>
-                                <li><a href="/lionstracksapp/"><i class="l-basic-upload"></i><span class="txt">Upload Data</span></a>
+                                <li><a href="/lionstracksapp/dataupload/"><i class="l-basic-upload"></i><span class="txt">Upload Data</span></a>
                                 </li>
                                 <li><a href="/lionstracksapp/"><i class="l-basic-todolist-pen"></i><span class="txt">Set Goals</span></a>
-                                </li>
-                                <li><a href="/lionstracksapp/"><i class="l-basic-world"></i><span class="txt">Connect With Others</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -123,47 +132,7 @@
                 <!-- End .sidebar-inner -->
             </aside>
             <!-- / page-sidebar -->
-            <!-- Start #right-sidebar -->
-            <aside id="right-sidebar" class="right-sidebar hidden-md hidden-sm hidden-xs">
-                <!-- Start .sidebar-inner -->
-                <div class="sidebar-inner">
-                    <!-- Start .sidebar-scrollarea -->
-                    <div class="sidebar-scrollarea">
-                        <div class="tabs">
-                            <!-- Start .rs tabs -->
-                            <ul id="rstab" class="nav nav-tabs nav-justified">
-                                <li class="active">
-                                    <a href="#" data-toggle="tab">Feed</a>
-                                </li>
-                            </ul>
-                            <div id="rstab-content" class="tab-content">
-                                <div class="tab-pane fade active in" id="activity">
-                                    <ul class="timeline timeline-icons timeline-sm">
-                                        <li>
-                                            <p>
-                                                <a href="#">John Sun</a> reached his Health Goals
-                                                <span class="timeline-icon"><i class="fa fa-file-text-o"></i></span>
-                                                <span class="timeline-date">Jan 1, 2015</span>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                Lion's Tracks updated
-                                                <span class="timeline-icon"><i class="fa fa-database"></i></span>
-                                                <span class="timeline-date">Dec 1, 2014</span>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End .rs tabs -->
-                    </div>
-                    <!-- End .sidebar-scrollarea -->
-                </div>
-                <!-- End .sidebar-inner -->
-            </aside>
-            <!-- End #right-sidebar -->
+
             <!-- .page-content -->
             <div class="page-content sidebar-page right-sidebar-page clearfix">
                 <!-- .page-content-wrapper -->
@@ -213,14 +182,9 @@
             <p class="pull-left">
                 Copyrights &copy; 2015 Lions Tracks. All rights reserved.
             </p>
-            <p class="pull-right">
-                <a href="#" class="mr5">Terms of use</a>
-            </p>
         </div>
         <!-- End #footer  -->
-        <!-- Back to top -->
-        <div id="back-to-top"><a href="#">Back to Top</a>
-        </div>
+
         <!-- Javascripts -->
         <!-- Load page context data -->
         <script>
