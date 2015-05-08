@@ -97,7 +97,7 @@
                                 </button>
                                 <ul class="dropdown-menu right" role="menu">
                                 {% if user.is_authenticated %}
-                                    <li><a href="/lionstracksapp/updateprofile/"><i class="fa fa-edit"></i>Edit profile</a>
+                                    <li><a href="#"><i class="fa fa-edit"></i>Edit profile</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li><a href="/lionstracksapp/logout/"><i class="fa fa-power-off"></i>Logout</a>
@@ -141,26 +141,42 @@
                         <!-- .page-content-inner -->
                         <div id="page-header" class="clearfix">
                             <div class="page-header">
-                                <h2>Upload Health Data</h2>
-                                <span class="txt">Please upload health data from iPhone Health app</span>
+                                <h2>Manage My User Settings</h2>
+                                <span class="txt">Your current user profile settings can be updated here</span>
                             </div>
+<!--
                             <div class="header-stats">
                                 <div class="spark clearfix">
                                     <div class="spark-info"><span class="number">1,500</span>Users </div>
                                     <div id="spark-visitors" class="sparkline"></div>
                                 </div>
                             </div>
+-->
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="panel panel-default toggle panelMove panelClose panelRefresh">
                                         <!-- Start .panel -->
                                         <div class="panel-heading">
-                                            <h4 class="panel-title">Dropzone uploader</h4>
+                                            <h4 class="panel-title">My Settings</h4>
                                         </div>
                                         <div class="panel-body">
-                                            <form id="file"  class="dropzone" action="/lionstracksapp/dataupload/" enctype="multipart/form-data" method="post">
+                                            <form id="user_profile"  class="" action="/lionstracksapp/updateprofile/" method="post">
                                                 {% csrf_token %}
+                    <div class="form-group">
+<!--
+                        <label for="" class="col-md-3 control-label">Allow my uploaded health data to be viewed by other users</label>
+-->
+                        <input type="checkbox" class="" name="worldreadable" placeholder="Open Data" />
+                        &nbsp;&nbsp;Allow other registered users to see my uploaded health data
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                            <!--<button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>-->
+                            <input type="submit" name="profileUpdate" value="Update" type="button" class="btn btn-info" />
+                            <!--<span style="margin-left:8px;">or</span>-->
+                    </div>
                                             </form>
                                         </div>
                                     </div>

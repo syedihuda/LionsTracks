@@ -10,7 +10,6 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from lionstracksapp.forms import UserForm
-from django.db.models import Avg, Count
 import json
 
 from django.shortcuts import render
@@ -87,6 +86,7 @@ def user_login(request):
             webauth.login(request, user)
             request.session['user_id'] = user.pk
             request.session['user_name'] = user.username
+            #request.session['user'] = user
             return HttpResponseRedirect('/lionstracksapp/')
             #render(request, 'lionstracksapp/dashboard.html')
         else:
@@ -110,6 +110,24 @@ def user_logout(request):
 def signup(request):
     return render(request, 'lionstracksapp/signup.html', None)
 
+def update_profile(request):
+    if request.method == 'POST':
+        if 'worldreadable' in request.POST: # checked
+            message = 'make data public'
+            user = request.session.get('user')
+            profile = user.profile
+            profile.world_readable = True
+            profile.save()
+        else:
+            message = 'make data private'   # unchecked
+            user = request.session.get('user')
+            profile = user.profile
+            profile.world_readable = False
+            profile.save()
+        return render(request, 'lionstracksapp/profile.html')
+    else:
+        return render(request, 'lionstracksapp/profile.html')
+
 @login_required
 def index(request):
     user_id = request.session.get('user_id')
@@ -124,15 +142,6 @@ def index(request):
                    'user_list': User.objects.all()}
     else:
         context = {'step_data':get_metric_data('STEPS'), 'distance_data':get_metric_data('DISTANCE'), 'stairs_data':get_metric_data('STAIRS')}
-
-    context['user_avg_steps'] = HealthMetric.objects.filter(activity_type='STEPS', user=str(user_id)).aggregate(Avg('amount'))['amount__avg']
-    context['all_users_avg_steps'] = HealthMetric.objects.filter(activity_type='STEPS').aggregate(Avg('amount'))['amount__avg']
-    context['user_avg_stairs'] = HealthMetric.objects.filter(activity_type='STAIRS', user=str(user_id)).aggregate(Avg('amount'))['amount__avg']
-    context['all_users_avg_stairs'] = HealthMetric.objects.filter(activity_type='STAIRS').aggregate(Avg('amount'))['amount__avg']
-    context['user_avg_distance'] = HealthMetric.objects.filter(activity_type='DISTANCE', user=str(user_id)).aggregate(Avg('amount'))['amount__avg']
-    context['all_users_avg_distance'] = HealthMetric.objects.filter(activity_type='DISTANCE').aggregate(Avg('amount'))['amount__avg']
-    context['all_users_count'] = User.objects.aggregate(Count('id'))['id__count']
-
     return render(request, 'lionstracksapp/dashboard.html', context)
 
 def show_user_metrics(request):

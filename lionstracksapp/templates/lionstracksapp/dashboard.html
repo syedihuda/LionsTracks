@@ -99,7 +99,7 @@
                         </button>
                         <ul class="dropdown-menu right" role="menu">
                             {% if user.is_authenticated %}
-                                <li><a href="#"><i class="fa fa-edit"></i>Edit profile</a>
+                                <li><a href="/lionstracksapp/updateprofile"><i class="fa fa-edit"></i>Edit profile</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li><a href="/lionstracksapp/logout/"><i class="fa fa-power-off"></i>Logout</a>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="header-stats">
                         <div class="spark clearfix">
-                            <div class="spark-info"><span class="number">{{ all_users_count|safe }}</span>Users </div>
+                            <div class="spark-info"><span class="number">1,500</span>Users </div>
                             <div id="spark-visitors" class="sparkline"></div>
                         </div>
                     </div>
@@ -177,21 +177,21 @@
                                 <!-- Start .panel -->
                                 <div class="panel-body">
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to={{ user_avg_steps|safe }}>0</span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to="85">0</span>
                                         </div>
                                         <div class="spark-info mtm5">Your Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to={{ all_users_avg_steps|safe }}></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="98"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Columbia Daily Average</div>
+                                        <div class="spark-info">Peer Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="5500"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="67"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Recommended Daily Average</div>
+                                        <div class="spark-info">Columba Daily Average</div>
                                     </div>
                                 </div>
                             </div>
@@ -301,21 +301,21 @@
                                 <!-- Start .panel -->
                                 <div class="panel-body">
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to={{ user_avg_stairs|safe }}>0</span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to="6">0</span>
                                         </div>
                                         <div class="spark-info mtm5">Your Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to={{ all_users_avg_stairs|safe }}></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="3"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Columbia Daily Average</div>
+                                        <div class="spark-info">Peer Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="12"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="2"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Recommended Daily Average</div>
+                                        <div class="spark-info">Columba Daily Average</div>
                                     </div>
                                 </div>
                             </div>
@@ -351,21 +351,21 @@
                                 <!-- Start .panel -->
                                 <div class="panel-body">
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to={{ user_avg_distance|safe }}>0</span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32" data-from="0" data-to="8">0</span>
                                         </div>
                                         <div class="spark-info mtm5">Your Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to={{ all_users_avg_distance|safe }}></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="12"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Columbia Daily Average</div>
+                                        <div class="spark-info">Peer Daily Average</div>
                                     </div>
                                     <div class="spark clearfix">
-                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="5250"></span>
+                                        <div class="spark-info mb0"><span class="number stats-number s32 color-gray-light" data-from="0" data-to="6"></span>
                                         </div>
                                         <div class="sparkline spark-payments mt0"></div>
-                                        <div class="spark-info">Recommended Daily Average</div>
+                                        <div class="spark-info">Columba Daily Average</div>
                                     </div>
                                 </div>
                             </div>
@@ -412,7 +412,7 @@
 </script>
 <!--[if lt IE 9]>
   <script type="text/javascript" src="{% static 'lionstracksapp/js/libs/excanvas.min.js' %}"></script>
-  <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <script type="text/javascript" src="{% static 'lionstracksapp/js/libs/respond.min.js' %}"></script>
 <![endif]-->
 <!-- Bootstrap plugins -->
